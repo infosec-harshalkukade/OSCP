@@ -27,7 +27,84 @@ upload flags
 prepare report
 
 
---------
+////////////////////////////
+
+OSCP Exam Format
+The PWK course prepares for the OSCP exam, a 24-hour exam which a member of OffSec proctors to ensure you follow exam requirements. The exam consists of two parts:
+
+Traditional penetration testing: This part consists of three independent targets that require two steps to compromise. You are awarded 20 points per successfully compromised machine, split into 10 points for low-privilege access and 10 points for privilege escalation, for a total of 60 points. You prove success by taking screenshots and submitting a proof file (local.txt or proof.txt) to your control panel.
+Active directory testing: This part includes two client machines and one domain controller. To achieve 40 points, you must fully compromise the domain controller. No partial points are awarded.
+The points awarded during the exam are not the only ones on offer. Before starting the exam, you can receive ten bonus points by submitting at least 80% of the correct solutions for every module's lab in the PWK course and 30 correct proof.txt hashes for 30 challenge labs. 
+
+OSCP Exam Report
+Upon completing the exam, you will have 24 hours to write a professional report describing your exploitation process for each target. 
+
+This report must document your attacks, including all steps, commands issued, and console output. It should be thorough enough that a third-party reader could replicate your attacks step-by-step.
+
+To pass the exam, you must achieve a minimum score of 70 points, provide sufficient documentation, and follow OffSec’s strict exam requirements regarding exploit code, exam proofs, and exam restrictions.
+
+Failing the OSCP exam will require you to pay for a retake. This costs $249 unless you are signed up for one of OffSec’s annual subscription plans (Learn One or Learn Unlimited).
+
+Now you know the basics. Let’s jump into what you can expect on the OSCP exam.
+
+OSCP Exam Guide: What Can I Expect?
+The PWK course material is extensive. It includes everything from creating bash scripts to performing Active Directory and buffer overflows. However, much of this material is not tested during the OSCP exam. 
+
+Knowing what material from the PWK course you will be tested on is important before sitting your OSCP exam. This will allow you to dedicate your time to perfecting these skills, giving you the best chance of passing the exam. 
+
+Let’s look at what is and is not included in the exam.
+
+What is NOT in the OSCP Exam
+Here are topics taught in the PWK course that are not included in the OSCP exam.
+
+Bash and Python Scripting
+The PWK course includes sections on the basics of Bash and Python scripting. You’ll not be tested on this knowledge specifically, so don’t worry about memorizing syntax, listing language features, or creating scripts from scratch. 
+
+Open Source Intelligence (OSINT)
+The PWK course has an entire section on information gathering. This is a vital phase during a real-world penetration test, but in the OSCP exam, you don’t need to gather public information about your targets. You only need to use tools like Nmap to find open ports, services, and vulnerabilities. 
+
+Buffer Overflows
+The PWK teaches how to perform buffer overflow attacks against vulnerable Windows and Linux applications. This is valuable knowledge, but it’s no longer needed during your OSCP exam. The Active Directory portion of the OSCP exam has replaced this previous requirement.
+
+Poisoning and Spoofing Attacks
+The new PWK course is heavily focused on testing Active Directory environments. You’ll learn how to enumerate and attack Active Directory using various techniques, including how to use tools like Responder to perform poisoning and spoofing attacks. These attacks are common in real-world internal pen testing but are not tested on the OSCP exam. In fact, they are banned. 
+
+Anti-Virus Evasion and Persistence
+During the PWK course, you’ll be exposed to material on anti-virus evasion and establishing persistence on compromised machines. These are great topics to know, but they are not tested on the OSCP exam. These topics often are more aligned with red teaming than penetration testing.
+
+What IS in the OSCP Exam
+Here’s the course material you should master to prepare for your OSCP exam.
+
+Privilege Escalation
+To earn all the points offered during your OSCP exam, you must perform privilege escalation on the machines you target. Escalating your privileges accounts for half the points available, so mastering Windows and Linux privilege escalation is critical for success. 
+
+Report Writing
+Although not a traditional “hacker” skill, you must be able to structure and write a complete penetration test report. This is a skill you’ll need if you want to become a real penetration tester and one you must perform to pass the OSCP exam. Once you complete your exam, you must submit a detailed report that details your findings and allows a reasonably skilled third party to reproduce your testing step-by-step.
+
+Web Attacks
+Although not strictly a web app penetration test exam, you must often exploit at least one web exploit to gain access to a machine, though not always. This is typically a web application vulnerability like SQL injection, cross-site scripting, or broken access control. Ensure you know how to enumerate and exploit vulnerable web applications before your test.
+
+Enumeration
+A fundamental skill to master to pass the OSCP exam is enumeration. Everyone who has ever taken the OSCP will lecture you on the importance of performing enumeration to find all possible attack paths, vulnerabilities, and missing security controls. The main difference between passing or failing your OSCP is learning to perform thorough enumeration.
+
+Enumeration is even more important now that most of the exam focuses on Active Directory. Ensure you learn to enumerate and exploit common Active Directory vulnerabilities, be comfortable using tools like Bloodhound and Mimikatz, and perform attacks like Kerberoasting and pass the hash.
+
+Public Exploits
+During your OSCP exam, you must use public exploits to hack machines. These exploits are usually found in places like GitHub or Exploit-DB and require tweaking to match your target machine. Learning basic scripting skills will be helpful, but more importantly, practice finding, tweaking, and using these exploits against vulnerable machines on hacking platforms.
+
+Should I Prepare Before Taking the PWK Course (OSCP Requirements)?
+Preparing yourself before starting the PWK course is a good idea. At a minimum, OffSec recommends a solid understanding of networking, Windows and Linux administration skills, and familiarity with Bash or Python scripting. 
+
+However, most people who have passed the OSCP believe you should acquire more skills before tackling the course. 
+
+Cyber Security Foundational Knowledge
+A strong foundation in IT, networking, and cyber security is essential. You should know how to troubleshoot IT issues, describe common network ports and protocols, and discuss common defenses used to protect against attacks. 
+
+You better have this knowledge locked down before starting the PWK course material. 
+
+Acquiring these foundational skills and knowledge is described in depth in our article, Best Way to Learn Cyber Security. The following courses also cover this material.
+
+
 **oscp important commands and tools:**
 
 Information Gathering and Enumeration
