@@ -1,5 +1,7 @@
 **oscp important commands and tools:**
+
 Here are some important commands and tools that are frequently used during the OSCP (Offensive Security Certified Professional) exam:
+--
 
 Information Gathering and Scanning
 Nmap (Network Mapper)
@@ -14,7 +16,9 @@ bash
 nmap -A <target_IP>
 Netcat (nc)
 
-Open a listener:
+--
+**Open a listener:**
+
 bash
 
 nc -lvnp <port>
@@ -22,7 +26,10 @@ Connect to a service:
 bash
 
 nc <target_IP> <port>
-Gobuster / Dirb (Directory Bruteforcing)
+
+--
+
+**Gobuster / Dirb (Directory Bruteforcing)**
 
 Gobuster for directories:
 bash
@@ -32,14 +39,19 @@ Dirb basic scan:
 bash
 
 dirb http://<target_IP>
-Nikto (Web Vulnerability Scanner)
 
+--
+
+**Nikto (Web Vulnerability Scanner)**
 Basic web scan:
 bash
 
 nikto -h http://<target_IP>
-Exploitation Tools
-Metasploit Framework
+
+==
+
+**Exploitation Tools**
+**Metasploit Framework**
 
 Start Metasploit:
 bash
@@ -58,14 +70,18 @@ set LHOST <your_IP>
 exploit
 Searchsploit (Exploit Database)
 
-Search for an exploit:
+--
+
+**Search for an exploit:**
 bash
 
 searchsploit <service/software_name>
 Password Cracking
 Hydra (Brute-force Login)
 
-Brute force SSH login:
+--
+
+**Brute force SSH login:** X [not allwed in oscp ]
 bash
 
 hydra -l <username> -P <password_list> ssh://<target_IP>
