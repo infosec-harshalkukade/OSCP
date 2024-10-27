@@ -1,16 +1,28 @@
 IP
+
 OS
+
 open port
+
 web tech
+
 users
+
 creds
+
 files/dir
+
 web root
+
 privesc
+
 initial foothold access
+
 root level access
+
 flag
-upload flags to upload.offsec.com
+
+upload flags 
 --
 prepare report
 
