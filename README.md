@@ -1,7 +1,8 @@
 # OSCP
 OSCP Notes
 Vvi 1
-https://help.offsec.com/hc/en-us/articles/8586537411988-Getting-started-with-Essential-Learning-Paths  =
+https://help.offsec.com/hc/en-us/articles/8586537411988-Getting-started-with-Essential-Learning-Paths  
+=
  
 Vvi 2
 https://help.offsec.com/hc/en-us/articles/23381957082900-How-to-run-Windows-script-in-Windows-Powershell
@@ -154,3 +155,31 @@ This is an area I would also like to OffSec improve on, as they have strict rule
 ## And after the OSCP Exam
 
 OffSec state it may take thirty days to get results, but from what I've seen most people get their results within five days. I imagine a weekend submission may take a little bit longer. I did my exam early in the weekday and received my results midday two days later. The certificate does seem to arrive a little bit more erratically, due to COVID 19, as I haven't worked out a pattern of who receives theirs and when. I passed less than a week ago, so I won't see mine for maybe a little bit more.
+/////////////
+OSCP Syllabus
+The updated course includes 23 learning modules, which include:
+
+General Course Introduction
+Introduction to Cybersecurity
+Effective Learning Strategies
+Report Writing for Penetration Testers
+Information Gathering
+Vulnerability Scanning
+Introduction to Web Applications
+Common Web Application Attacks
+SQL Injection Attacks
+Client-Side Attacks
+Location Public Exploits
+Fixing Exploits
+Antivirus Evasion
+Password Attacks
+Windows Privielge Escalation
+Linux Privilege Escalation
+Port Redirection and SSH Tunneling
+Advanced Tunneling
+The Metasploit Framework
+Active Directory Introduction and Enumeration 
+Attacking Active Directory Authentication
+Lateral Movement in Active Directory 
+Assembling the Pieces
+///////////////////
