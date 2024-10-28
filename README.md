@@ -703,7 +703,6 @@ Public Exploit Databases:
 
 	•	Remember, the goal is to hit the passing score, so prioritize systems based on difficulty and your strengths.
 
-All the best for your exam!
 
 
 
