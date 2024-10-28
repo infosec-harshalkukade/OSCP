@@ -12,6 +12,19 @@ sudo openvpn OS-XXXXXX-OSCP.ovpn 1 ⨯
 
 <enter U/P>
 
+/////////////////////////////////////
+
+https://proctoring.offensive-security.com/Student/login
+
+OSID:  
+
+MD5
+
+proctoring@offensive-security.com
+
+allow browser notification
+
+allow 'Use your camera' 
 
 
 /////////////////////////////////////
