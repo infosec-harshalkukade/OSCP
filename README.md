@@ -3,6 +3,7 @@ ping <target_ip>
 
 **OS**
 nmap -O <target_ip>   # OS detection
+
 nmap -A <target_ip>    # Aggressive scan with OS detection and services
 nc -nv <target_ip> <port> # Banner grabbing to infer OS from service banner
 
