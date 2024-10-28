@@ -120,7 +120,7 @@ exam control panel
 copy the content of the flag and paste it into the respective submission field
 
 --
-prepare report
+prepare report and upload to https://upload.offsec.com/ 
 
 ////////////////////////////////
 ////////////////////////////////
