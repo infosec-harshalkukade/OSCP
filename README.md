@@ -678,7 +678,7 @@ Public Exploit Databases:
 
 ////////////////////////////////
 
-Here are some last-minute tips for your OSCP exam:
+ **last-minute tips :**
 
 	1.	Time Management:
 	•	Break down the exam into segments. Spend a set amount of time (e.g., 30 minutes to 1 hour) on each machine before moving to the next. Prioritize the easier ones to gain points quickly.
