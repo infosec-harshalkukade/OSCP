@@ -1,3 +1,5 @@
+
+
 **IP**
 
 ping <target_ip>
@@ -17,6 +19,7 @@ nmap -sV -sC <target_ip>           # Scan for open ports and services
 nmap -p- <target_ip>               # Scan all ports (1-65535)
 
 rustscan -a <target_ip> -- -sC -sV
+
 
 **web tech**
 
@@ -207,6 +210,121 @@ copy the content of the flag and paste it into the respective submission field
 prepare report and upload to https://upload.offsec.com/ 
 
 ////////////////////////////////
+
+
+
+=========================
+
+
+NMAP cmds
+
+nmap -Pn -sS -p- --min-rate=10000 -v [IP Address]
+nmap -Pn -sC -sV -O -p [open ports] [IP Address]
+nmap -Pn -A -p [open ports] --script=smb-os-discovery,smb-enum-shares,smb-enum-users [IP Address]
+nmap -Pn -p 389 --script=ldap-rootdse,ldap-search,ldap-novell-getpass [IP Address]
+nmap -Pn -p 445 --script=smb-enum-domains,smb-enum-groups,smb-enum-users [IP Address]
+
+nmap -Pn -p 88 --script=krb5-enum-users [IP Address]
+nmap -p 21 --script=ftp-anon,ftp-bounce,ftp-syst [IP]
+nmap -p 22 --script=ssh-auth-methods,ssh-brute [IP]
+nmap -p 25 --script=smtp-enum-users,smtp-open-relay [IP]
+
+nmap -p 53 --script=dns-zone-transfer,dns-nsid [IP]
+nmap -p 80,443 --script=http-enum,http-title,http-methods [IP]
+nmap -p 110 --script=pop3-capabilities, pop3-ntlm-info [IP]
+nmap -p 135,139 --script=msrpc-enum,smb-os-discovery [IP]
+nmap -p 143 --script=imap-capabilities [IP]
+nmap -p 445 --script=smb-enum-shares,smb-enum-users,smb-vuln-ms17-010 [IP]
+nmap -p 3306 --script=mysql-enum,mysql-brute [IP]
+nmap -p 3389 --script=rdp-enum-encryption,rdp-vuln-ms12-020 [IP]
+nmap -p 8080 --script=http-enum,http-title [IP]
+nmap -p 5900 --script=vnc-info,vnc-brute [IP]
+nmap -p 8089 --script=http-title [IP]
+nmap -p 2049 --script=nfs-ls,nfs-showmount [IP]
+nmap -p 5000 --script=http-title,http-methods [IP]
+nmap -p 8081 --script=http-title [IP]
+nmap -p 8443 --script=http-enum,http-title [IP]
+=
+Discover who else is on the network
+netdiscover
+
+Discover IP Mac and Mac vendors from ARP
+netdiscover -r $ip/24
+
+Nmap stealth scan using SYN
+nmap -sS $ip
+
+Nmap stealth scan using FIN
+nmap -sF $ip
+
+Nmap Banner Grabbing
+nmap -sV -sT $ip
+
+Nmap OS Fingerprinting
+nmap -O $ip
+
+Nmap Regular Scan:
+nmap $ip/24
+
+Enumeration Scan
+nmap -p 1-65535 -sV -sS -A -T4 $ip/24 -oN nmap.txt
+
+Enumeration Scan All Ports TCP / UDP and output to a txt file
+nmap -oN nmap2.txt -v -sU -sS -p- -A -T4 $ip
+
+Nmap output to a file:
+nmap -oN nmap.txt -p 1-65535 -sV -sS -A -T4 $ip/24
+
+Quick Scan:
+nmap -T4 -F $ip/24
+
+Quick Scan Plus:
+nmap -sV -T4 -O -F --version-light $ip/24
+
+Quick traceroute
+nmap -sn --traceroute $ip
+
+All TCP and UDP Ports
+nmap -v -sU -sS -p- -A -T4 $ip
+
+Intense Scan:
+nmap -T4 -A -v $ip
+
+Intense Scan Plus UDP
+nmap -sS -sU -T4 -A -v $ip/24
+
+Intense Scan ALL TCP Ports
+nmap -p 1-65535 -T4 -A -v $ip/24
+
+Intense Scan - No Ping
+nmap -T4 -A -v -Pn $ip/24
+
+Ping scan
+nmap -sn $ip/24
+
+Slow Comprehensive Scan
+nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53 --script "default or (discovery and safe)" $ip/24
+
+Scan with Active connect in order to weed out any spoofed ports designed to troll you
+nmap -p1-65535 -A -T5 -sT $ip
+
+Enumeration - DNS Enumeration
+NMAP DNS Hostnames Lookup 
+nmap -F --dns-server <dns server ip> <target ip range>
+=
+Nmap port version detection MAXIMUM power
+nmap -vvv -A --reason --script="+(safe or default) and not broadcast" -p <port> <host>
+
+
+NFS (Network File System) Enumeration
+
+Show Mountable NFS Shares 
+nmap -sV --script=nfs-showmount $ip
+
+=
+nmap -v -p 139,445 -oG smb.txt $ip-254
+
+///////////////////////////
 
 ////////////////////////////////
 
