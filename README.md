@@ -1,3 +1,22 @@
+VPN:
+
+Go to kali>>Download the exam-connection.tar.bz2 file from the link provided in the exam email to your Kali machine.
+
+Open terminal from tar file location
+
+tar xvfj exam-connection.tar.bz2
+
+sudo openvpn <OSID>.ovpn 
+
+sudo openvpn OS-XXXXXX-OSCP.ovpn 1 ⨯
+
+<enter U/P>
+
+
+
+/////////////////////////////////////
+
+
 **IP**
 
 ping <target_ip>
