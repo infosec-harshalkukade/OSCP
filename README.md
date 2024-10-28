@@ -349,7 +349,7 @@ Good luck with your exam!
 ////////////////////////////////
 
 
-** high risk ports** 
+**high risk ports** 
 
  high-risk ports to focus on when scanning during the OSCP exam. These ports are commonly associated with services that could have exploitable vulnerabilities or misconfigurations, making them key targets during your penetration testing:
 
