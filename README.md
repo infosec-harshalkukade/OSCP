@@ -27,6 +27,13 @@ upload flags
 prepare report
 
 ////////////////////////////////
+```bash
+systemctl stop acunetix
+systemctl stop nessusd
+systemctl disable  acunetix
+systemctl disable nessusd
+```
+////////////////:
 
 3AD and 3 individual machines 
 nmap commands
