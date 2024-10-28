@@ -32,6 +32,7 @@ systemctl stop acunetix
 systemctl stop nessusd
 systemctl disable  acunetix
 systemctl disable nessusd
+rm /usr/lib/python3.12/EXTERNALLY-MANAGED
 ```
 ////////////////:
 
