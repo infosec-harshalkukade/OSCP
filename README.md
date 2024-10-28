@@ -1,6 +1,4 @@
-
-
-###**IP**
+**IP**
 
 ping <target_ip>
 
