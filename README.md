@@ -114,7 +114,11 @@ type C:\Users\Administrator\Desktop\root.txt
 type C:\Users\<user>\Desktop\user.txt
 
 
-upload flags 
+**upload flags **
+
+exam control panel 
+copy the content of the flag and paste it into the respective submission field
+
 --
 prepare report
 
