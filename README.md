@@ -199,7 +199,7 @@ type C:\Users\<user>\Desktop\user.txt
 
 
 
-**upload flags **
+**upload flags**
 
 exam control panel 
 
@@ -207,7 +207,7 @@ copy the content of the flag and paste it into the respective submission field
 
 --
 
-prepare report and upload to https://upload.offsec.com/ 
+ **report:** prepare and upload to https://upload.offsec.com/ 
 
 ////////////////////////////////
 
