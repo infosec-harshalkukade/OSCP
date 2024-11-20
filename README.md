@@ -1,11 +1,3 @@
-win11 pro
-VK7JG-NPHTM-C97JM-9MPGT-3V66T
-
--
-vmware workstation
-
--
-
 VPN:
 
 Go to kali>>Download the exam-connection.tar.bz2 file from the link provided in the exam email to your Kali machine.
@@ -4532,3 +4524,9 @@ Attacking Active Directory Authentication
 Lateral Movement in Active Directory 
 Assembling the Pieces
 ///////////////////
+
+win11 pro
+VK7JG-NPHTM-C97JM-9MPGT-3V66T
+-
+vmware workstation
+-
